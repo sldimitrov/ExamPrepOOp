@@ -1,14 +1,13 @@
 from abc import ABC, abstractmethod
 from typing import List
-
 from project.fish.base_fish import BaseFish
 
 
 class BaseDiver(ABC):
 
     def __init__(self, name: str, oxygen_level: float):
-        self.__name = name
-        self.__oxygen_level = oxygen_level
+        self.name = name
+        self.oxygen_level = oxygen_level
         self.catch: List[BaseFish] = []
         self.competition_points = 0.0
         self.has_health_issue = False
@@ -42,11 +41,10 @@ class BaseDiver(ABC):
         ...
 
     def hit(self, fish: BaseFish):
-        if self.__oxygen_level >= fish.TIME_TO_CATCH:
+        if self.__oxygen_level >= fish.time_to_catch:
             self.catch.append(fish)
-            self.__oxygen_level -= fish.TIME_TO_CATCH
-            self.competition_points += fish.points
-
+            self.__oxygen_level -= fish.time_to_catch
+            self.competition_points += round(fish.points, 1)
         else:
             self.__oxygen_level = 0
 
@@ -54,5 +52,5 @@ class BaseDiver(ABC):
         self.has_health_issue = not self.has_health_issue
 
     def __str__(self):
-        return (f"{self.__class__.__name__}: [Name: {self.name}, Oxygen level left: {self.__oxygen_level}, "
-                f"Fish caught: {len(self.catch)}, Points earned: {self.competition_points}]")
+        return (f"{self.__class__.__name__}: [Name: {self.name}, Oxygen level left: {self.oxygen_level}, "
+                f"Fish caught: {len(self.catch)}, Points earned: {self.competition_points:.1f}]")

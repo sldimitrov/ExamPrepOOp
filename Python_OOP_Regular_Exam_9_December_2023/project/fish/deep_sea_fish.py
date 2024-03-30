@@ -9,5 +9,4 @@ class DeepSeaFish(BaseFish):
 
     def fish_details(self):
         return (f"{self.__class__.__name__}: {self.name} [Points: {self.points}, "
-                f"Time to Catch: {self.TIME_TO_CATCH} seconds]")
-
+                f"Time to Catch: {self.time_to_catch} seconds]")

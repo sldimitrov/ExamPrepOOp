@@ -11,7 +11,7 @@ class ScubaDiver(BaseDiver):
     def miss(self, time_to_catch: int):
         used_oxy = round(time_to_catch * self.OXY_DECREASE_INDEX)
         if self.oxygen_level < used_oxy:
-            self.__oxygen_level = 0
+            self.oxygen_level = 0
         else:
             self.oxygen_level -= used_oxy
 
