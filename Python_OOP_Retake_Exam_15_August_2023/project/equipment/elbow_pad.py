@@ -2,11 +2,13 @@ from project.equipment.base_equipment import BaseEquipment
 
 
 class ElbowPad(BaseEquipment):
-    PRICE_INCREASE = 1.1  # 10 percent
+    PROTECTION = 90
+    PRICE = 25.0
+    TYPE_ = 'ElbowPad'
 
     def __init__(self):
-        super().__init__(protection=90, price=25.0)
+        super().__init__(protection=self.PROTECTION, price=self.PRICE)
 
     def increase_price(self):
-        self.price *= self.PRICE_INCREASE
+        self.price *= 1.1
 
