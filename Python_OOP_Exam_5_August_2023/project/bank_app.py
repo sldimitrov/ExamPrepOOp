@@ -50,26 +50,19 @@ class BankApp:
     def remove_client(self, client_id: str):
         client = self.find_client_by_id(client_id)
         if client is None:
-            return f"No such client!"
+            raise Exception("No such client!")
         if client.loans:
             raise Exception("The client has loans! Removal is impossible!")
         self.clients.remove(client)
         return f"Successfully removed {client.name} with ID {client_id}."
 
     def increase_loan_interest(self, loan_type: str):
-        number_of_changed_loans = [loan.increase_interest_rate() for loan in self.loans
-                                   if loan.__class__.__name__ == loan_type]
-
-        return f"Successfully changed {len(number_of_changed_loans)} loans."
+        number_ch_loans = [loan.increase_interest_rate() for loan in self.loans if loan.__class__.__name__ == loan_type]
+        return f"Successfully changed {len(number_ch_loans)} loans."
 
     def increase_clients_interest(self, min_rate: float):
-        changed_client_rates_number = 0
-        for client in self.clients:
-            if client.interest < min_rate:
-                client.increase_clients_interest()
-                changed_client_rates_number += 1
-
-        return f"Number of clients affected: {changed_client_rates_number}."
+        number_ch_rates = [client.increase_clients_interest() for client in self.clients if client.interest < min_rate]
+        return f"Number of clients affected: {len(number_ch_rates)}."
 
     def get_statistics(self):
         clients_interest_rate = [client.interest for client in self.clients]
