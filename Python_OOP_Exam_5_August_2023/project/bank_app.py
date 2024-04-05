@@ -58,7 +58,7 @@ class BankApp:
 
     def increase_loan_interest(self, loan_type: str):
         number_of_changed_loans = [loan.increase_interest_rate() for loan in self.loans
-                                         if loan.__class__.__name__ == loan_type]
+                                   if loan.__class__.__name__ == loan_type]
 
         return f"Successfully changed {len(number_of_changed_loans)} loans."
 
@@ -66,7 +66,7 @@ class BankApp:
         changed_client_rates_number = 0
         for client in self.clients:
             if client.interest < min_rate:
-                client.interest = min_rate
+                client.increase_clients_interest()
                 changed_client_rates_number += 1
 
         return f"Number of clients affected: {changed_client_rates_number}."
@@ -99,4 +99,3 @@ Average Client Interest Rate: {avg_client_interest_rate:.2f}"""
         if client:
             return client
         return None
-
